@@ -99,3 +99,71 @@ DigitalOcean has its own cloud firewall in addition to UFW on the server. This p
    - UDP 60000-61000 (mosh) from All IPv4, All IPv6
 3. Outbound: Allow all (default)
 4. Apply to your droplet
+
+## Step 8: Set Up GitHub Access (for pushing code and creating PRs)
+
+The setup script generated an SSH key for your droplet. You need to add it to GitHub so the server can push code and create PRs.
+
+1. SSH into your server and copy the public key:
+   ```bash
+   cat ~/.ssh/id_ed25519.pub
+   ```
+2. Go to [github.com/settings/keys](https://github.com/settings/keys)
+3. Click "New SSH key"
+4. Title: "Claude Dev Droplet"
+5. Paste the key and save
+
+Test it works:
+```bash
+ssh -T git@github.com
+```
+Expected: "Hi YOUR_USERNAME! You've successfully authenticated..."
+
+## Step 9: Authenticate GitHub CLI
+
+This lets you (and Claude Code) create PRs, manage issues, and more directly from the server.
+
+```bash
+gh auth login
+```
+
+Choose:
+- GitHub.com
+- SSH
+- Your existing SSH key
+- Login with a web browser (open the URL on your phone)
+
+Test it works:
+```bash
+gh auth status
+```
+
+## Workflow: Submitting Work from the Droplet
+
+Once GitHub access is set up, your droplet can submit work independently:
+
+```bash
+# Push commits
+git push origin main
+
+# Create a pull request
+gh pr create --title "Add feature X" --body "Description"
+
+# Merge a PR
+gh pr merge 123
+
+# Clone a new repo to work on
+git clone git@github.com:YOUR_USER/your-repo.git
+```
+
+Claude Code can do all of this for you — just ask it to "push this" or "create a PR".
+
+## Syncing Back to Your Mac
+
+When you're at your desk and want the latest code:
+
+```bash
+git pull origin main
+```
+
+All work done on the droplet is on GitHub. Your Mac just pulls it down.
