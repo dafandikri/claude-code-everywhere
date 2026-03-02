@@ -94,14 +94,14 @@ echo "[6/12] Hardening SSH..."
 mkdir -p /etc/ssh/sshd_config.d
 cat > /etc/ssh/sshd_config.d/99-hardened.conf << 'SSHEOF'
 PasswordAuthentication no
-PermitRootLogin no
+PermitRootLogin prohibit-password
 PubkeyAuthentication yes
 AuthorizedKeysFile .ssh/authorized_keys
 PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 UsePAM yes
 X11Forwarding no
-MaxAuthTries 3
+MaxAuthTries 5
 ClientAliveInterval 300
 ClientAliveCountMax 2
 SSHEOF
