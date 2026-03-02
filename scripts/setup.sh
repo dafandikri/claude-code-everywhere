@@ -16,9 +16,11 @@ if [ ! -f /swapfile ]; then
     fallocate -l 2G /swapfile
     chmod 600 /swapfile
     mkswap /swapfile
-    swapon /swapfile
-    echo '/swapfile none swap sw 0 0' >> /etc/fstab
-    echo "  Swap enabled."
+    swapon /swapfile 2>/dev/null || echo "  Warning: swapon failed (normal in containers). Swap will activate on next boot."
+    if ! grep -q '/swapfile' /etc/fstab 2>/dev/null; then
+        echo '/swapfile none swap sw 0 0' >> /etc/fstab
+    fi
+    echo "  Swap configured."
 else
     echo "  Swap already exists, skipping."
 fi
@@ -30,12 +32,12 @@ apt-get update -qq
 apt-get upgrade -y -qq
 
 # Set timezone to Asia/Jakarta
-timedatectl set-timezone Asia/Jakarta
+timedatectl set-timezone Asia/Jakarta 2>/dev/null || ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 
 # --- 2. Install required packages ---
 echo "[3/12] Installing core packages..."
 apt-get install -y -qq \
-  mosh tmux fail2ban git curl ufw unattended-upgrades \
+  sudo mosh tmux fail2ban git curl ufw unattended-upgrades \
   build-essential gcc make \
   python3 python3-pip python3-venv \
   postgresql-client \
@@ -83,11 +85,13 @@ chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
 usermod -aG sudo "$USERNAME"
 usermod -aG docker "$USERNAME"
 # Allow passwordless sudo for convenience (optional but helpful for mobile)
+mkdir -p /etc/sudoers.d
 echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME
 chmod 440 /etc/sudoers.d/$USERNAME
 
 # --- 4. SSH hardening ---
 echo "[6/12] Hardening SSH..."
+mkdir -p /etc/ssh/sshd_config.d
 cat > /etc/ssh/sshd_config.d/99-hardened.conf << 'SSHEOF'
 PasswordAuthentication no
 PermitRootLogin no
@@ -101,7 +105,7 @@ MaxAuthTries 3
 ClientAliveInterval 300
 ClientAliveCountMax 2
 SSHEOF
-systemctl restart sshd
+systemctl restart sshd 2>/dev/null || echo "  Note: sshd restart skipped (will take effect on next boot or in non-container env)"
 
 # --- 5. Firewall ---
 echo "[7/12] Configuring UFW firewall..."
@@ -109,7 +113,7 @@ ufw default deny incoming
 ufw default allow outgoing
 ufw allow 22/tcp        # SSH
 ufw allow 60000:61000/udp  # mosh
-ufw --force enable
+ufw --force enable 2>/dev/null || echo "  Note: UFW enable skipped (normal in containers)"
 
 # --- 6. fail2ban ---
 echo "[8/12] Configuring fail2ban..."
@@ -127,8 +131,8 @@ logpath = /var/log/auth.log
 maxretry = 3
 bantime = 1h
 F2BEOF
-systemctl enable fail2ban
-systemctl restart fail2ban
+systemctl enable fail2ban 2>/dev/null || true
+systemctl restart fail2ban 2>/dev/null || echo "  Note: fail2ban restart skipped (will start on boot in non-container env)"
 
 # --- 7. Automatic security updates ---
 echo "[9/12] Enabling automatic security updates..."
