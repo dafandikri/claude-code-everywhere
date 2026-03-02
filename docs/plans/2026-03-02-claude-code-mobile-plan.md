@@ -1051,7 +1051,7 @@ Write `docs/GITLAB-SETUP.md`:
 ```markdown
 # GitLab Setup Guide (for SE Project / Commercial Work)
 
-This guide sets up GitLab access on your droplet for the PPL-SIRA project with Nashta Group.
+This guide sets up GitLab access on your droplet for the your-project project with your company partner.
 
 ## Prerequisites
 
@@ -1075,7 +1075,7 @@ Test it:
 ```bash
 ssh -T git@gitlab.com
 # or for company GitLab:
-ssh -T git@gitlab.nashtagroup.co.id
+ssh -T git@gitlab.your-company.example.com
 ```
 
 ## Step 2: Authenticate glab CLI
@@ -1094,10 +1094,10 @@ Choose:
 
 ```bash
 cd ~
-git clone git@gitlab.com:YOUR_GROUP/smart-invoice-reminder-ai.git
+git clone git@gitlab.com:YOUR_GROUP/your-project.git
 # or company GitLab:
-git clone git@gitlab.nashtagroup.co.id:YOUR_GROUP/smart-invoice-reminder-ai.git
-cd smart-invoice-reminder-ai
+git clone git@gitlab.your-company.example.com:YOUR_GROUP/your-project.git
+cd your-project
 ```
 
 ## Step 4: Set Up GitLab MCP (optional)
@@ -1107,7 +1107,7 @@ Connect Claude Code to GitLab directly:
 ```bash
 claude mcp add --transport http GitLab https://gitlab.com/api/v4/mcp
 # or for company GitLab:
-claude mcp add --transport http GitLab https://gitlab.nashtagroup.co.id/api/v4/mcp
+claude mcp add --transport http GitLab https://gitlab.your-company.example.com/api/v4/mcp
 ```
 
 This lets Claude Code read issues, create MRs, and check pipelines natively.
@@ -1125,13 +1125,13 @@ Use the same email registered with GitLab.
 
 ```bash
 # Start Claude Code in the project directory
-cd ~/smart-invoice-reminder-ai
+cd ~/your-project
 claude
 
 # Tell Claude what to do:
-# "Pick up SIRA-42, implement the risk scoring endpoint following
+# "Pick up PROJ-42, implement the risk scoring endpoint following
 #  the patterns in apps/api/CLAUDE.md, write integration tests,
-#  create a feature branch abhip/feat/SIRA-42-risk-scoring,
+#  create a feature branch your-name/feat/PROJ-42-risk-scoring,
 #  commit, push, and create a merge request"
 ```
 
@@ -1140,9 +1140,9 @@ claude
 ```bash
 # Via glab CLI
 glab mr create \
-  --title "SIRA-42 feat(api): add risk scoring endpoint" \
+  --title "PROJ-42 feat(api): add risk scoring endpoint" \
   --description "Implements ML-based risk scoring pipeline" \
-  --source-branch abhip/feat/SIRA-42-risk-scoring
+  --source-branch your-name/feat/PROJ-42-risk-scoring
 
 # Or let Claude Code do it:
 # "Create a merge request for this branch with a proper description"
@@ -1150,8 +1150,8 @@ glab mr create \
 
 ## Project-Specific Notes
 
-- Branch naming: `<name>/<type>/<SIRA-XX>-<short-description>`
-- MR title format: `<SIRA-XX> <type>(scope): description`
+- Branch naming: `<name>/<type>/<PROJ-XX>-<short-description>`
+- MR title format: `<PROJ-XX> <type>(scope): description`
 - Always run `make lint` and `make test` before pushing
 - The project CLAUDE.md at repo root has all conventions
 ```
@@ -1350,18 +1350,9 @@ git commit -m "chore: add gitignore, MIT license, and env example"
 - Modify: `docs/GITLAB-SETUP.md`
 - Modify: `CLAUDE.md`
 
-**Step 1: In the design doc, replace all personal references**
+**Step 1: In all docs, replace personal/commercial references with generic placeholders**
 
-Replace:
-- `nashtagroup.co.id` → `your-company.example.com`
-- `xxx.nashtagroup.co.id` → `app.your-company.example.com`
-- `xxx-api.nashtagroup.co.id` → `api.your-company.example.com`
-- `PPL-SIRA` / `ppl-sira` → `your-project`
-- `SIRA` (Linear key) → `PROJ`
-- `Smart Invoice Reminder AI` → `your SE project`
-- `Nashta Group` → `your company partner`
-- References to specific courses (data mining, mental health community, etc.) → `academic coursework`
-- `gitlab.nashtagroup.co.id` → `gitlab.your-company.example.com`
+Replace company domains, project names, team names, and course references with generic equivalents like `your-company.example.com`, `your-project`, `PROJ`, etc.
 
 **Step 2: In CLAUDE.md, generalize the target user context**
 

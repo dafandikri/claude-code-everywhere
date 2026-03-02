@@ -203,7 +203,7 @@ Authenticate once via browser. After that, Claude Code can interact with your Li
 
 ## GitLab Integration (for SE Project / Commercial Work)
 
-The SE project (PPL-SIRA / Smart Invoice Reminder AI) uses GitLab provided by Nashta Group. The droplet supports both GitHub (personal projects) and GitLab (commercial projects).
+The SE project (your-project / your SE project) uses GitLab provided by your company partner. The droplet supports both GitHub (personal projects) and GitLab (commercial projects).
 
 **Tools installed:**
 - `glab` — GitLab CLI (create MRs, manage issues, pipelines)
@@ -215,9 +215,9 @@ The SE project (PPL-SIRA / Smart Invoice Reminder AI) uses GitLab provided by Na
 claude mcp add --transport http GitLab https://gitlab.com/api/v4/mcp
 ```
 
-Or if using a self-hosted GitLab (e.g., Nashta Group's instance):
+Or if using a self-hosted GitLab (e.g., your company partner's instance):
 ```bash
-claude mcp add --transport http GitLab https://gitlab.nashtagroup.co.id/api/v4/mcp
+claude mcp add --transport http GitLab https://gitlab.your-company.example.com/api/v4/mcp
 ```
 
 **What Claude Code can do via GitLab MCP:**
@@ -233,7 +233,7 @@ claude mcp add --transport http GitLab https://gitlab.nashtagroup.co.id/api/v4/m
 glab auth login
 
 # Create a merge request
-glab mr create --title "SIRA-42 feat(api): add risk scoring endpoint" --description "..."
+glab mr create --title "PROJ-42 feat(api): add new endpoint" --description "..."
 
 # View pipeline status
 glab ci status
@@ -250,10 +250,10 @@ cat ~/.ssh/id_ed25519.pub
 
 ## Commercial Project Context
 
-The SE project involves a real company (Nashta Group):
-- **Domains:** `xxx.nashtagroup.co.id` (frontend), `xxx-api.nashtagroup.co.id` (backend)
+The SE project involves a real company (your company partner):
+- **Domains:** `app.your-company.example.com` (frontend), `api.your-company.example.com` (backend)
 - **GitLab:** Company-provided, shared with team
-- **Linear workspace:** `ppl-sira`, team `PPL-SIRA` (key: `SIRA`)
+- **Linear workspace:** `your-project`, team `your-project` (key: `PROJ`)
 - **Stack:** React + Vite (frontend), FastAPI + Celery (backend), Supabase, Docker
 - **Quality bar:** Commercial-grade — typed code, tested, linted, reviewed
 

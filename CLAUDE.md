@@ -45,11 +45,10 @@ This is NOT an application — it's infrastructure/DevOps tooling. There are no 
 ## Target User Context
 
 The primary user is a college student doing:
-- **Commercial SE project** — Smart Invoice Reminder AI (PPL-SIRA) with Nashta Group
-  - Uses GitLab (company-provided), Linear for PM, domain: nashtagroup.co.id
+- **Commercial SE project** — team project with a company partner
+  - Uses GitLab (company-provided), Linear for PM
   - Must ship commercial-grade code
-- **Data mining** coursework — Python, pandas, scikit-learn, Jupyter
-- **Research methods** — academic writing, data analysis
+- **Academic coursework** — Python, pandas, scikit-learn, Jupyter, data analysis
 - Wants to work from iPhone while away from desk (gym, transit, class)
 
 ## Server Environment (What setup.sh Creates)
