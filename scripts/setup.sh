@@ -121,14 +121,14 @@ cat > /etc/fail2ban/jail.local << 'F2BEOF'
 [DEFAULT]
 bantime = 1h
 findtime = 10m
-maxretry = 3
+maxretry = 5
 
 [sshd]
 enabled = true
 port = ssh
 filter = sshd
 logpath = /var/log/auth.log
-maxretry = 3
+maxretry = 5
 bantime = 1h
 F2BEOF
 systemctl enable fail2ban 2>/dev/null || true
