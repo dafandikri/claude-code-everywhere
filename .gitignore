@@ -1,1 +1,15 @@
+# Private config (never commit)
+.env.local
+.local/
+*.pem
+*.key
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
