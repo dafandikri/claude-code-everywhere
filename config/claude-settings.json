@@ -1,0 +1,13 @@
+{
+  "Stop": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "curl -s -d \"Claude Code finished a task\" ${NTFY_TOPIC:-ntfy.sh/claude-dev-notify}"
+        }
+      ]
+    }
+  ]
+}
