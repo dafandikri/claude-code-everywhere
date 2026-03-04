@@ -1,4 +1,64 @@
 {
+  "permissions": {
+    "defaultMode": "default"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash -c '\"$(which node)\" \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)dist/index.js\"'"
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "linear@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "claude-hud@claude-hud": true,
+    "claude-md-management@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "gitlab@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "serena@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "explanatory-output-style@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "greptile@claude-plugins-official": true,
+    "vercel@claude-plugins-official": true,
+    "learning-output-style@claude-plugins-official": true,
+    "semgrep@claude-plugins-official": true
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Heel hooking the crux",
+      "Reading the beta",
+      "Dynoing to the next hold",
+      "Crimping on a two-finger pocket",
+      "Toeing in on the sloper",
+      "Flagging out to stay on",
+      "Matching hands on the jug",
+      "Setting feet before the move",
+      "Deadpointing to the crimp",
+      "Resting on the kneebar",
+      "Campus boarding the sequence",
+      "Mantling over the lip",
+      "Cross-stepping through the crux",
+      "Sticking the sloper dyno",
+      "Palming the compression wall",
+      "Smearing on the blank slab",
+      "Locking off on a crimp",
+      "Cutting feet on the overhang",
+      "Projecting the send"
+    ]
+  },
+  "skipDangerousModePermissionPrompt": true,
   "Stop": [
     {
       "matcher": "*",

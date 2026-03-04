@@ -1,4 +1,4 @@
-.PHONY: setup notifications health backup restore help
+.PHONY: setup notifications health backup restore sync-config help
 
 # Load .env.local if it exists
 -include .env.local
@@ -26,6 +26,9 @@ backup: ## Backup server config to ~/backups/
 
 restore: ## Restore server config from backup
 	bash scripts/restore.sh
+
+sync-config: ## Install plugins + sync Claude Code config to this machine (run on droplet)
+	bash scripts/setup-claude-config.sh
 
 test-docker: ## Test setup.sh in Docker (local validation)
 	docker run --rm -it -v "$$(pwd)/scripts:/scripts" ubuntu:24.04 bash -c \
